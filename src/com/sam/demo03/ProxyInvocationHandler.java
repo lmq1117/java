@@ -24,6 +24,20 @@ public class ProxyInvocationHandler implements InvocationHandler {
     // 处理代理实例 并返回 结果
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        return method.invoke(rent,args);
+        //代理干活前夹带
+        seeHouse();
+        Object result = method.invoke(rent, args);
+        //代理干活后夹带
+        charge();
+        return result;
+    }
+
+
+    public void seeHouse(){
+        System.out.println("代理带看房子");
+    }
+
+    public void charge(){
+        System.out.println("收中介费");
     }
 }
